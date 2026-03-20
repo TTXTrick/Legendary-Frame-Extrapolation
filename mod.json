@@ -1,0 +1,15 @@
+{
+	"geode": "3.1.0",
+	"version": "v1.0.0",
+	"id": "com.txtir.frame_extrapolation",
+	"name": "Legendary Frame Extrapolation",
+	"developer": "txtir",
+	"description": "Visual frame extrapolation.",
+	"settings": {
+		"enable-extrapolation": {
+			"name": "Enable Extrapolation",
+			"type": "bool",
+			"default": true
+		}
+	}
+}
