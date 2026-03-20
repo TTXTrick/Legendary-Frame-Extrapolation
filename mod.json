@@ -1,16 +1,17 @@
 {
-  "geode": "3.1.0",
-  "version": "v1.0.0",
-  "id": "com.ttxtrick.frame_extrapolation",
-  "name": "Legendary Frame Extrapolation",
-  "developer": "TTXTrick",
-  "description": "Adds optional visual frame extrapolation for smoother gameplay on high refresh rate monitors.",
-  "settings": {
-    "enable-extrapolation": {
-      "name": "Enable Extrapolation",
-      "type": "bool",
-      "default": true,
-      "description": "Smooths out player movement between fixed physics ticks."
-    }
-  }
+	"geode": "3.1.0",
+	"version": "v1.0.0",
+	"id": "com.ttxtrick.frame_extrapolation",
+	"name": "Legendary Frame Extrapolation",
+	"developer": "TTXTrick",
+	"description": "Adds optional visual frame extrapolation for smoother gameplay across all platforms.",
+	"repository": "https://github.com/TTXTrick/Legendary-Frame-Extrapolation",
+	"settings": {
+		"enable-extrapolation": {
+			"name": "Enable Extrapolation",
+			"type": "bool",
+			"default": true,
+			"description": "Smooths out player movement between fixed physics ticks."
+		}
+	}
 }
