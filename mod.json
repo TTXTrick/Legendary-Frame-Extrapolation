@@ -4,14 +4,12 @@
 	"id": "com.ttxtrick.frame_extrapolation",
 	"name": "Legendary Frame Extrapolation",
 	"developer": "TTXTrick",
-	"description": "Adds optional visual frame extrapolation for smoother gameplay across all platforms.",
-	"repository": "https://github.com/TTXTrick/Legendary-Frame-Extrapolation",
+	"description": "Visual frame extrapolation.",
 	"settings": {
 		"enable-extrapolation": {
 			"name": "Enable Extrapolation",
 			"type": "bool",
-			"default": true,
-			"description": "Smooths out player movement between fixed physics ticks."
+			"default": true
 		}
 	}
 }
