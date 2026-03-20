@@ -13,13 +13,18 @@ jobs:
       matrix:
         config:
           - name: Windows
+            os: windows-latest
           - name: macOS
+            os: macos-latest
           - name: Android32
+            os: ubuntu-latest
+            target: Android32
           - name: Android64
+            os: ubuntu-latest
+            target: Android64
 
     name: Build ${{ matrix.config.name }}
-    # We use the official Geode action which handles the OS selection automatically
-    runs-on: ${{ (matrix.config.name == 'macOS' && 'macos-latest') || (matrix.config.name == 'Windows' && 'windows-latest') || 'ubuntu-latest' }}
+    runs-on: ${{ matrix.config.os }}
 
     steps:
       - name: Checkout Repository
@@ -28,16 +33,13 @@ jobs:
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
-          # This saves the build for the "package" step below
           combine: true
-          # Maps our matrix name to the Geode target name
-          target: ${{ (matrix.config.name == 'Android32' && 'Android32') || (matrix.config.name == 'Android64' && 'Android64') || '' }}
+          target: ${{ matrix.config.target }}
 
   package:
     name: Package Geode Mod
     runs-on: ubuntu-latest
     needs: build
-    # Runs even if one platform fails so you still get the ones that worked
     if: always()
 
     steps:
@@ -51,6 +53,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          # This is the name of the download link on the Summary page
           name: geode-release
           path: ${{ steps.build.outputs.build-output }}
