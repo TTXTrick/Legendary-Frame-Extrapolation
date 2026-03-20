@@ -3,8 +3,7 @@ name: Build Geode Mod
 on:
   workflow_dispatch:
   push:
-    branches:
-      - "**"
+    branches: ["**"]
 
 jobs:
   build:
@@ -13,7 +12,8 @@ jobs:
       matrix:
         config:
           - { name: Windows, os: windows-latest, target: "" }
-          - { name: macOS, os: macos-latest, target: "" }
+          - { name: macOS,   os: macos-latest,   target: "" }
+          - { name: iOS,     os: macos-latest,   target: "iOS" }
           - { name: Android32, os: ubuntu-latest, target: "Android32" }
           - { name: Android64, os: ubuntu-latest, target: "Android64" }
 
@@ -29,6 +29,7 @@ jobs:
         with:
           combine: true
           target: ${{ matrix.config.target }}
+          setup-sdk: true
 
   package:
     name: Package Geode Mod
