@@ -1,0 +1,16 @@
+{
+  "geode": "3.1.0",
+  "version": "v1.0.0",
+  "id": "com.yourname.frame_extrapolation",
+  "name": "Optional Frame Extrapolation",
+  "developer": "YourName",
+  "description": "Adds optional visual frame extrapolation for smoother gameplay on high refresh rate monitors.",
+  "settings": {
+    "enable-extrapolation": {
+      "name": "Enable Extrapolation",
+      "type": "bool",
+      "default": true,
+      "description": "Smooths out player movement between fixed physics ticks."
+    }
+  }
+}
