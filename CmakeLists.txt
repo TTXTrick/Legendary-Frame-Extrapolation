@@ -1,22 +1,19 @@
 cmake_minimum_required(VERSION 3.27.9)
 
-# 1. THE FIX: Convert the GEODE_SDK environment variable to a format CMake understands.
-# This prevents the "Could not find a package configuration file" error on Windows.
+# Fix for Windows pathing in GitHub Actions
 if(DEFINED ENV{GEODE_SDK})
     file(TO_CMAKE_PATH "$ENV{GEODE_SDK}" GEODE_SDK_PATH)
     set(Geode_DIR "${GEODE_SDK_PATH}")
     list(APPEND CMAKE_PREFIX_PATH "${GEODE_SDK_PATH}")
 endif()
 
-# 2. Find the Geode package
+# Load Geode
 find_package(Geode REQUIRED CONFIG)
 
-# 3. Define the project name
 project(frame_extrapolation VERSION 1.0.0)
 
-# 4. Link your source code. 
-# CRITICAL: Ensure your C++ file is actually at: src/main.cpp
+# The source file MUST be at src/main.cpp
 add_library(${PROJECT_NAME} SHARED src/main.cpp)
 
-# 5. Finalize the Geode mod setup
+# Setup the mod
 setup_geode_mod(${PROJECT_NAME})
