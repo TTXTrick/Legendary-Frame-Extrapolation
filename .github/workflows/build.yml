@@ -29,7 +29,8 @@ jobs:
         with:
           combine: true
           target: ${{ matrix.config.target }}
-          setup-sdk: true
+          # This forces the specific SDK version and bypasses the auto-detection bug
+          sdk: v3.1.0
 
   package:
     name: Package Geode Mod
