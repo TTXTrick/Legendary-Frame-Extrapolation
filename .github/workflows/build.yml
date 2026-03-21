@@ -26,7 +26,8 @@ jobs:
       - name: Build
         uses: geode-sdk/build-geode-mod@main
         with:
-          # Use 'latest' to ensure iOS binaries are found
+          # CRITICAL: Forces the runner to export SDK paths
+          setup-sdk: true
           sdk: latest
           target: ${{ matrix.config.target }}
           combine: true
