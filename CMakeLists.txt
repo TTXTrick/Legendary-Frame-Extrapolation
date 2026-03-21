@@ -1,26 +1,23 @@
 cmake_minimum_required(VERSION 3.27.9)
 
-# 1. First, try the standard environment variable (Works on Windows)
-if(DEFINED ENV{GEODE_SDK})
-    file(TO_CMAKE_PATH "$ENV{GEODE_SDK}" GEODE_SDK_PATH)
-    set(Geode_DIR "${GEODE_SDK_PATH}")
-    list(APPEND CMAKE_PREFIX_PATH "${GEODE_SDK_PATH}")
-endif()
+# We are telling CMake: "Don't guess. Look in EVERY one of these spots."
+set(POTENTIAL_GEODE_PATHS
+    "$ENV{GEODE_SDK}"
+    "$ENV{HOME}/.geode/sdk"
+    "/home/runner/.geode/sdk"
+    "/Users/runner/.geode/sdk"
+    "C:/Users/runner/.geode/sdk"
+)
 
-# 2. THE FIX: If the environment variable fails (Linux/Mac runners), force the default path.
-if(NOT Geode_DIR)
-    # The Geode CLI always installs here by default on Unix systems
-    set(Geode_DIR "$ENV{HOME}/.geode/sdk")
-    list(APPEND CMAKE_PREFIX_PATH "${Geode_DIR}")
-endif()
-
-# 3. Find Geode using the paths we just defined
-find_package(Geode REQUIRED CONFIG)
+# Force find_package to use our list and ignore system defaults that might be empty
+find_package(Geode REQUIRED CONFIG PATHS ${POTENTIAL_GEODE_PATHS} NO_DEFAULT_PATH)
 
 project(LegendaryFrameExtrapolation VERSION 1.0.0)
 
+# Automatically finds your code in the src folder
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp src/*.hpp src/*.h)
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
+# This handles the cross-compilation for iOS/Android/Windows/Mac
 setup_geode_mod(${PROJECT_NAME})
