@@ -1,10 +1,10 @@
 {
 	"geode": "3.1.0",
 	"version": "v1.0.0",
-	"id": "com.ttxtrick.frame_extrapolation",
+	"id": "ttxtrick.legendary_extrapolation",
 	"name": "Legendary Frame Extrapolation",
 	"developer": "TTXTrick",
-	"description": "Smooth movement for Windows, Mac, Android, and iOS.",
+	"description": "Cross-platform smooth movement extrapolation.",
 	"settings": {
 		"enable-extrapolation": {
 			"name": "Enable Extrapolation",
