@@ -18,12 +18,16 @@ jobs:
 
     name: Build ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
+    
+    # This ensures the SDK location is identical for every step in the job
+    env:
+      GEODE_SDK: ${{ github.workspace }}/geode-sdk
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build
+      - name: Build Mod
         uses: geode-sdk/build-geode-mod@main
         with:
           sdk: latest
@@ -39,10 +43,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Combine
+        
+      - name: Combine Binaries
         uses: geode-sdk/build-geode-mod/combine@main
         id: build
-      - name: Upload
+        
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: geode-release
