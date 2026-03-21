@@ -26,8 +26,8 @@ jobs:
       - name: Build
         uses: geode-sdk/build-geode-mod@main
         with:
-          # CRITICAL: Forces the runner to export SDK paths
-          setup-sdk: true
+          sdk: latest
+          build-config: Release
           target: ${{ matrix.config.target }}
           combine: true
 
