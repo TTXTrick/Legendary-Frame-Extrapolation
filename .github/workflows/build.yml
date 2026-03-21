@@ -24,7 +24,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build
-        uses: geode-sdk/build-geode-mod@main
+        # We are using v3 here for stability
+        uses: geode-sdk/build-geode-mod@v3
         with:
           combine: true
           target: ${{ matrix.config.target }}
@@ -39,7 +40,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Combine
-        uses: geode-sdk/build-geode-mod/combine@main
+        uses: geode-sdk/build-geode-mod/combine@v3
         id: build
       - name: Upload
         uses: actions/upload-artifact@v4
