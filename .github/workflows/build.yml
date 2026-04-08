@@ -18,10 +18,6 @@ jobs:
 
     name: Build ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
-    
-    # This ensures the SDK location is identical for every step in the job
-    env:
-      GEODE_SDK: ${{ github.workspace }}/geode-sdk
 
     steps:
       - name: Checkout
