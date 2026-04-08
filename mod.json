@@ -4,8 +4,7 @@
 	"id": "ttxtrick.frame_extrap",
 	"name": "Legendary Frame Extrapolation",
 	"developer": "TTXTrick",
-	"description": "Cross-platform smooth movement extrapolation for Geometry Dash.",
-	"repository": "https://github.com/TTXTrick/Legendary-Frame-Extrapolation",
+	"description": "Cross-platform smooth movement extrapolation.",
 	"settings": {
 		"enable-extrapolation": {
 			"name": "Enable Extrapolation",
