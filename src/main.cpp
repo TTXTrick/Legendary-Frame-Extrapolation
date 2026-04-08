@@ -18,7 +18,7 @@ class $modify(ExtrapolatedPlayer, PlayerObject) {
     void update(float dt) {
         PlayerObject::update(dt);
 
-        // Check if our optional setting is toggled on
+        // Check if the optional setting is toggled on
         if (!Mod::get()->getSettingValue<bool>("enable-extrapolation")) {
             return;
         }
@@ -40,8 +40,7 @@ class $modify(ExtrapolatedPlayer, PlayerObject) {
 
         auto& state = s_playerStates[this];
         
-        // If the player moved an excessive amount in one tick (e.g., entered a portal),
-        // we skip extrapolation this frame to prevent visual "sweeping" glitches.
+        // If the player moved an excessive amount in one tick, we skip extrapolation this frame to prevent visual glitches.
         if (ccpDistance(state.lastPosition, state.currentPosition) > 50.0f) {
             PlayerObject::visit();
             return;
