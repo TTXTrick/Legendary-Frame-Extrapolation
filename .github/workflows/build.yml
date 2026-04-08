@@ -37,12 +37,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
-      - name: Combine Binaries
+      - name: Combine
         uses: geode-sdk/build-geode-mod/combine@main
         id: build
-        
-      - name: Upload Artifact
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: geode-release
