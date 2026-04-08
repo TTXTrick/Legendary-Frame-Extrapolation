@@ -29,7 +29,7 @@ jobs:
         with:
           sdk: latest
 
-      # STEP 2: Build the mod using the CLI we just installed
+      # Build the mod using the CLI
       - name: Build Mod
         uses: geode-sdk/build-geode-mod@v2
         with:
