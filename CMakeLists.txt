@@ -2,31 +2,21 @@ cmake_minimum_required(VERSION 3.27)
 
 project(LegendaryFrameExtrapolation VERSION 1.0.0)
 
-# 1. Look for the SDK in EVERY possible location
-set(SEARCH_PATHS
-    "${CMAKE_CURRENT_SOURCE_DIR}/geode-sdk"
-    "${CMAKE_CURRENT_SOURCE_DIR}/geode"
-    "$ENV{GEODE_SDK}"
-    "$ENV{HOME}/.geode/sdk"
-    "$ENV{LOCALAPPDATA}/Geode/sdk"
+# 1. Ask the Geode CLI exactly where the SDK is installed
+execute_process(
+    COMMAND geode sdk path
+    OUTPUT_VARIABLE GEODE_CLI_PATH
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_QUIET
 )
 
-# 2. Try to find the package with those hints
-find_package(Geode CONFIG HINTS ${SEARCH_PATHS})
+message(STATUS "Geode CLI reports SDK at: ${GEODE_CLI_PATH}")
 
-# 3. If that STILL fails, try a direct include from the workspace
-if(NOT Geode_FOUND)
-    file(GLOB_RECURSE FOUND_GEODE_CMAKE "${CMAKE_CURRENT_SOURCE_DIR}/*GeodeConfig.cmake")
-    if(FOUND_GEODE_CMAKE)
-        get_filename_component(GEODE_DIR_FOUND "${FOUND_GEODE_CMAKE}" DIRECTORY)
-        set(Geode_DIR "${GEODE_DIR_FOUND}")
-        find_package(Geode REQUIRED CONFIG)
-    else()
-        message(FATAL_ERROR "Geode SDK not found in workspace or system. Paths searched: ${SEARCH_PATHS}")
-    endif()
-endif()
+# 2. Tell CMake to ONLY look in that exact folder.
+set(Geode_DIR "${GEODE_CLI_PATH}")
+find_package(Geode REQUIRED CONFIG)
 
-# 4. Standard build
+# 3. Standard Build Logic
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp src/*.hpp src/*.h)
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 setup_geode_mod(${PROJECT_NAME})
