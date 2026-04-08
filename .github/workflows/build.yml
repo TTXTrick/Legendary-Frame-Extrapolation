@@ -23,16 +23,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # STEP 1: Manually set up the Geode CLI and SDK
-      - name: Setup Geode
-        uses: geode-sdk/setup-geode@v2
+      - name: Build Mod
+        uses: geode-sdk/build-geode-mod@main
         with:
           sdk: latest
-
-      # Build the mod using the CLI
-      - name: Build Mod
-        uses: geode-sdk/build-geode-mod@v2
-        with:
           combine: true
           target: ${{ matrix.config.target }}
 
@@ -44,10 +38,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Combine
-        uses: geode-sdk/build-geode-mod/combine@v2
+        
+      - name: Combine Binaries
+        uses: geode-sdk/build-geode-mod/combine@main
         id: build
-      - name: Upload
+        
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: geode-release
