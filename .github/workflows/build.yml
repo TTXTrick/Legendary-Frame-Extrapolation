@@ -3,8 +3,7 @@ name: Build Geode Mod
 on:
   workflow_dispatch:
   push:
-    branches:
-      - "**"
+    branches: ["**"]
 
 jobs:
   build:
@@ -22,9 +21,10 @@ jobs:
     runs-on: ${{ matrix.config.os }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          submodules: recursive # CRITICAL if gd-sim is a submodule!
+          submodules: recursive
 
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
@@ -36,13 +36,15 @@ jobs:
   package:
     name: Package builds
     runs-on: ubuntu-latest
-    needs: ['build']
+    needs: [build]
     if: always()
     steps:
-      - uses: geode-sdk/build-geode-mod/combine@main
+      - name: Combine
+        uses: geode-sdk/build-geode-mod/combine@main
         id: build
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload
+        uses: actions/upload-artifact@v4
         with:
-          name: Build Output
+          name: Build-Output
           path: ${{ steps.build.outputs.build-output }}
